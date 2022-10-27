@@ -4,17 +4,16 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 import Task from "./components/Task/Task";
 
 function App() {
-
   const [tasks, setTasks] = useState([
-      {text: 'Do homework-53', id: 'q1'},
-      {text: 'Read the lesson description', id: 'q2'},
-      {text: 'View webinar', id: 'q3'}
-    ]
-  );
+      {text: 'Do homework-53', id: 'q1', done: false},
+      {text: 'Read the lesson description', id: 'q2', done: false},
+      {text: 'View webinar', id: 'q3', done: false}
+    ]);
 
   const [currentTask, setCurrentTask] = useState({
     text: 'Add new task',
-    id: ''
+    id: '',
+    done: false
   });
 
   const addTask = () => {
@@ -25,10 +24,7 @@ function App() {
       copyCurrentTask.id = randomInt.toString()
       const copyTasks = [...tasks]
       copyTasks.push(copyCurrentTask);
-
       setTasks(copyTasks);
-
-      console.log(copyTasks);
     }
   };
 
@@ -37,28 +33,42 @@ function App() {
     copyCurrentTask.text = event.target.value;
 
     setCurrentTask(copyCurrentTask);
-    console.log('test');
   };
-
 
   const deleteTask = (id: string) => {
     const copyTasks = [...tasks];
-    console.log(copyTasks);
 
     copyTasks.forEach(elem => {
       if (elem.id === id) {
         copyTasks.splice(copyTasks.indexOf(elem), 1);
         setTasks(copyTasks);
-        console.log(copyTasks);
       }
     });
-  }
+  };
+
+  const check = (value: boolean, id: string) => {
+    const copyTasks = [...tasks];
+
+    copyTasks.forEach(elem => {
+      if (elem.id === id) {
+        if (value) {
+          elem.done = false;
+          setTasks(copyTasks);
+        } else {
+          elem.done = true;
+          setTasks(copyTasks);
+        }
+      }
+    });
+  };
 
   const taskList = tasks.map((task) => (
     <Task
       key={task.id}
       taskText={task.text}
       onDeleteClick={() => deleteTask(task.id)}
+      done={task.done}
+      onCheckChange={() => check(task.done, task.id)}
     >
     </Task>
   ));

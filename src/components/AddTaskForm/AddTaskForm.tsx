@@ -7,16 +7,13 @@ interface FormProps extends React.PropsWithChildren {
 }
 
 const AddTaskForm = (props: FormProps) => {
-
   return (
-
   <form className="mainForm">
     <div className="formBox">
     <input type={"text"} value={props.userInput} onChange={props.onTaskChange}/>
     <button type={"button"} onClick={props.onBtnClick}>Add</button>
     </div>
   </form>
-
   );
 }
 

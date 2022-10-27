@@ -23,7 +23,8 @@
   padding: 10px 30px;
   border: 2px solid #000;
   border-radius: 5px;
-  background: aqua;
+  background: green;
+  color: #fff;
 }
 
 .task {
@@ -46,4 +47,14 @@
   border-radius: 5px;
   background: brown;
   color: #fff;
+}
+
+.doneTask {
+  color: darkgrey;
+}
+
+.task div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
 }
