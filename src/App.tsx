@@ -1,13 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import AddTaskForm from "./AddTaskForm/AddTaskForm";
-import Task from "./Task/Task";
-
-
-type taskObject = {
-  text?: string;
-  id?: string;
-}
+import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
+import Task from "./components/Task/Task";
 
 function App() {
 
@@ -20,34 +14,62 @@ function App() {
 
   const [currentTask, setCurrentTask] = useState({
     text: 'Add new task',
-  })
+    id: ''
+  });
 
   const addTask = () => {
+    const copyCurrentTask = {...currentTask};
 
-  }
+    if (copyCurrentTask.text !== '' && copyCurrentTask.text !== 'Add new task') {
+      const randomInt = Math.floor(Math.random() * 10000000000);
+      copyCurrentTask.id = randomInt.toString()
+      const copyTasks = [...tasks]
+      copyTasks.push(copyCurrentTask);
+
+      setTasks(copyTasks);
+
+      console.log(copyTasks);
+    }
+  };
 
   const changeInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     const copyCurrentTask = {...currentTask};
     copyCurrentTask.text = event.target.value;
 
     setCurrentTask(copyCurrentTask);
-
-    console.log(currentTask.text);
     console.log('test');
   };
 
-  const taskList = tasks.map((task, index) => (
+
+  const deleteTask = (id: string) => {
+    const copyTasks = [...tasks];
+    console.log(copyTasks);
+
+    copyTasks.forEach(elem => {
+      if (elem.id === id) {
+        copyTasks.splice(copyTasks.indexOf(elem), 1);
+        setTasks(copyTasks);
+        console.log(copyTasks);
+      }
+    });
+  }
+
+  const taskList = tasks.map((task) => (
     <Task
       key={task.id}
       taskText={task.text}
+      onDeleteClick={() => deleteTask(task.id)}
     >
     </Task>
-  ))
+  ));
 
   return (
     <div className="App">
       <div className='container'>
-        <AddTaskForm userInput={currentTask.text} onTaskChange={(event) => changeInputValue(event)}/>
+        <AddTaskForm
+          userInput={currentTask.text}
+          onTaskChange={(event) => changeInputValue(event)}
+          onBtnClick={addTask}/>
         {taskList}
       </div>
     </div>
