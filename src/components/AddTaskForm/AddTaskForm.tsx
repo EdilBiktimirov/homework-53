@@ -15,6 +15,6 @@ const AddTaskForm = (props: FormProps) => {
     </div>
   </form>
   );
-}
+};
 
 export default AddTaskForm;

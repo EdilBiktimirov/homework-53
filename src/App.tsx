@@ -7,13 +7,13 @@ function App() {
   const [tasks, setTasks] = useState([
       {text: 'Do homework-53', id: 'q1', done: false},
       {text: 'Read the lesson description', id: 'q2', done: false},
-      {text: 'View webinar', id: 'q3', done: false}
+      {text: 'View webinar', id: 'q3', done: false},
     ]);
 
   const [currentTask, setCurrentTask] = useState({
     text: 'Add new task',
     id: '',
-    done: false
+    done: false,
   });
 
   const addTask = () => {
@@ -21,8 +21,8 @@ function App() {
 
     if (copyCurrentTask.text !== '' && copyCurrentTask.text !== 'Add new task') {
       const randomInt = Math.floor(Math.random() * 10000000000);
-      copyCurrentTask.id = randomInt.toString()
-      const copyTasks = [...tasks]
+      copyCurrentTask.id = randomInt.toString();
+      const copyTasks = [...tasks];
       copyTasks.push(copyCurrentTask);
       setTasks(copyTasks);
     }

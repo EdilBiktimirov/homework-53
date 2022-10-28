@@ -12,14 +12,11 @@ const Task = (props: TaskProps) => {
     <div className={props.done? 'doneTask task' : 'task'} id="task">
       <p>{props.taskText}</p>
       <div>
-        <label>
-          Done
           <input id={'checkbox'} type={'checkbox'} onChange={props.onCheckChange}/>
-        </label>
-        <button type={'button'} onClick={props.onDeleteClick} >Delete</button>
+        <button type={'button'} onClick={props.onDeleteClick}></button>
       </div>
     </div>
   );
-}
+};
 
-export default Task
+export default Task;
